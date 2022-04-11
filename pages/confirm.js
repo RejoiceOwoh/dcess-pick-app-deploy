@@ -2,14 +2,20 @@ import { accessToken } from 'mapbox-gl'
 import { useEffect, useState } from 'react'
 import tw from "tailwind-styled-components"
 import Map from './components/map'
+import { useRouter } from 'next/router'
+import RideSelector from './components/RideSelector'
 
 const Confirm = () => {
+ const router = useRouter()
+ const { pickup, dropoff } = router.query
+
+ console.log("Pickup", pickup)
+ console.log("Dropoff", dropoff)
 
  const [ pickupCoordinates, setPickupCoordinates ]  = useState()
  const [ dropoffCoordinates, setDropoffCoordinates ] = useState()
 
- const getPickupCordinates = () => {
-  const pickup = "Enugu";
+ const getPickupCordinates = (pickup) => {
   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
    new URLSearchParams({
     access_token: 'pk.eyJ1IjoicmVqb2ljZWNvcnBvcmF0aW9ucyIsImEiOiJjbDE2eTV2ZG4waGRvM2twZjk3MWFsOXUzIn0.xtCcnCaB0E8hNbieercpvQ',
@@ -22,8 +28,7 @@ const Confirm = () => {
   })
  }
 
- const getDropoffCoordinates = () => {
-  const dropoff = "Lagos";
+ const getDropoffCoordinates = (dropoff) => {
   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${dropoff}.json?` +
    new URLSearchParams({
     access_token: 'pk.eyJ1IjoicmVqb2ljZWNvcnBvcmF0aW9ucyIsImEiOiJjbDE2eTV2ZG4waGRvM2twZjk3MWFsOXUzIn0.xtCcnCaB0E8hNbieercpvQ',
@@ -37,9 +42,9 @@ const Confirm = () => {
  }
 
  useEffect (() => {
-  getPickupCordinates();
-  getDropoffCoordinates();
- }, [])
+  getPickupCordinates(pickup);
+  getDropoffCoordinates(dropoff);
+ }, [pickup, dropoff])
 
 
  return (
@@ -49,10 +54,10 @@ const Confirm = () => {
      dropoffCoordinates={dropoffCoordinates}
    />
     <RideContainer>
-    Pickup
-    {pickupCoordinates}
-    Dropoff
-    {dropoffCoordinates}
+     <RideSelector />
+     <ConfirmButtonContainer>
+      Confirm Dcess Code
+     </ConfirmButtonContainer>
     </RideContainer>
   </Wrapper>
  )
@@ -61,8 +66,13 @@ const Confirm = () => {
 export default Confirm
 
 const RideContainer = tw.div `
-flex-1
+flex-1 flex flex-col
 `
+
+const ConfirmButtonContainer = tw.div `
+bg-blue-700 text-white
+`
+
 
 const Wrapper = tw.div `
 flex h-screen flex-1 flex-col
