@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Search = () => {
  return (
   <Wrapper>
-   <Link href = '/index'>
+   <Link href = '/'>
     <ButtonContainer>
      <BackButton src='https://cdn-icons.flaticon.com/png/512/2099/premium/2099190.png?token=exp=1649628200~hmac=177a925f9aa9d801e013bfcc5083b027'/>
     </ButtonContainer>
@@ -34,7 +34,7 @@ const Search = () => {
    {/*Saved places*/}
 
    <FromLocations>
-    Let's Get Going ~~~
+    Let's Get Going  >>>
    </FromLocations>
    {/*Confirm Location*/}
   </Wrapper>
@@ -50,7 +50,7 @@ const ButtonContainer = tw.div `
 bg-white px-4
 `
 const BackButton = tw.img `
-h-12 pb-5 pt-2
+h-12 pb-5 pt-2 cursor-pointer
 `
 
 const FromtoIcons = tw.div`
@@ -86,6 +86,6 @@ flex items-center bg-white px-4 py-2
 const StarIcon = tw.img `
 bg-blue-200 w-10 h-10 p-2 rounded-full mr-2
 `
-const FromLocations = tw.button `
-bg-blue-200 font-bold p-4 flex w-full text-center mt-2 rounded-full center-items border-none outline-none
+const FromLocations = tw.div `
+bg-blue-200 font-bold text-center mt-2 text-xl p-4 w-full rounded-full cursor-pointer
 `
