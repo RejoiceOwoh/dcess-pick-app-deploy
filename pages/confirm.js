@@ -56,7 +56,9 @@ const Confirm = () => {
     <RideContainer>
      <RideSelector />
      <ConfirmButtonContainer>
-      Confirm Dcess Code
+      <ConfirmButton>
+       Confirm Ride!
+      </ConfirmButton>
      </ConfirmButtonContainer>
     </RideContainer>
   </Wrapper>
@@ -66,11 +68,15 @@ const Confirm = () => {
 export default Confirm
 
 const RideContainer = tw.div `
-flex-1 flex flex-col
+flex-1 flex flex-col h-1/2
+`
+
+const ConfirmButton = tw.div `
+bg-blue-600 text-white m-4 py-4 text-center text-xl cursor-pointer
 `
 
 const ConfirmButtonContainer = tw.div `
-bg-blue-700 text-white
+border-t-2 
 `
 
 

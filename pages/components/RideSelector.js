@@ -1,19 +1,23 @@
 import React from "react";
 import tw from "tailwind-styled-components"
+import { carList } from '../data/carList'
 
 const RideSelector = () => {
  return (
   <Wrapper>
    <Title>Choose a ride, or swipe up for more</Title>
    <CarList>
-    <Car>
-     <CarImage src="https://img.freepik.com/free-vector/isometric-car-icon-isolated-white_107791-127.jpg?t=st=1649641205~exp=1649641805~hmac=af53a81286ca4d598fd4a95f0d679131d3d31bc685572b62f335067f5d45d8f7&w=740" />
+
+    {carList.map((car, index) => (
+     <Car key = {index}>
+     <CarImage src={car.imgUrl} />
      <CarDetails>
-      <Service>God is Good Motors</Service>
+      <Service>{car.services}</Service>
       <Time>20 Mins Away</Time>
      </CarDetails>
      <Price>₦24,000</Price>
     </Car>
+    ))}
    </CarList>
   </Wrapper>
  )
@@ -22,26 +26,34 @@ const RideSelector = () => {
 export default RideSelector
 
 const Car = tw.div `
-flex
+flex p-4 items-center
 `
 const CarDetails = tw.div `
 flex-1
 `
 
-const Service = tw.div ``
+const Service = tw.div `
+font-medium
+`
 
-const Time = tw.div ``
+const Time = tw.div `
+text-xs text-red-500
+`
 
-const Price = tw.div ``
+const Price = tw.div `
+text-sm
+`
 
 const CarImage = tw.img `
-h-12
+h-12 mr-2
 `
 
 const Wrapper = tw.div `
-flex-1 
+flex-1 overflow-y-scroll flex flex-col
 `
-const CarList = tw.div ``
+const CarList = tw.div `
+overflow-y-scroll
+`
 
 const Title = tw.div `
 text-blue-500 text-center text-xs py-2 border-b
